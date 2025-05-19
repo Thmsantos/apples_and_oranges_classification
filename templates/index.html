@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <title>Classificador de Frutas</title>
+    <style>
+        body {
+            background-color: #fffaf0;
+            font-family: Arial, sans-serif;
+            color: #333;
+            padding: 40px;
+        }
+
+        h1 {
+            color: orange;
+            text-align: center;
+        }
+
+        form {
+            background-color: white;
+            padding: 20px;
+            margin: 20px auto;
+            border-radius: 10px;
+            max-width: 500px;
+            box-shadow: 0 0 10px rgba(255, 165, 0, 0.3);
+        }
+
+        label {
+            font-weight: bold;
+            color: orange;
+        }
+
+        input[type="text"],
+        input[type="file"] {
+            width: 100%;
+            padding: 8px;
+            margin: 10px 0 20px;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+        }
+
+        button {
+            background-color: orange;
+            color: white;
+            padding: 10px 20px;
+            border: none;
+            border-radius: 5px;
+            font-weight: bold;
+            cursor: pointer;
+        }
+
+        .resultado {
+            text-align: center;
+            margin-top: 20px;
+            font-size: 1.2em;
+            color: orange;
+        }
+    </style>
+</head>
+<body>
+    <h1>Classificador de Maçãs e Laranjas</h1>
+
+    <form method="POST" enctype="multipart/form-data">
+        <label for="file">Treinar com novo arquivo CSV:</label>
+        <input type="file" name="file" accept=".csv">
+        <button type="submit">Treinar Modelo</button>
+    </form>
+
+    <form method="POST">
+        <label for="weight">Peso (g):</label>
+        <input type="text" name="weight" placeholder="Ex: 150">
+
+        <label for="size">Tamanho (cm):</label>
+        <input type="text" name="size" placeholder="Ex: 6.5">
+
+        <button type="submit">Prever Espécie</button>
+    </form>
+
+    {% if accuracy %}
+        <div class="resultado">✅ Modelo treinado com {{ accuracy }}% de acurácia!</div>
+    {% endif %}
+
+    {% if species %}
+        <div class="resultado">🍊 Fruta prevista: <strong>{{ species }}</strong></div>
+    {% endif %}
+</body>
+</html>
